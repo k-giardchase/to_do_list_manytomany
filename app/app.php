@@ -29,20 +29,21 @@
         return $app['twig']->render('categories.twig', array('categories' => Category::getAll()));
     });
 
-    $app->post("/delete_categories", function() use ($app){
+    $app->post("/delete_tasks", function() use ($app){
         Category::deleteAll();
-        return $app['twig']->render('index.twig');
+        return $app['twig']->render('delete_tasks.twig');
     });
 
-    $app->post("/tasks", function() use ($app) {
-        $task = new Task($_POST['description'], $_POST['id']);
-        $task->save();
-        return $app['twig']->render('tasks.twig', array('tasks' => Task::getAll()));
-    });
 
     $app->post("/delete_tasks", function() use ($app) {
         Task::deleteAll();
-        return $app['twig']->render('index.twig');
+        return $app['twig']->render('delete_tasks.twig');
+    });
+
+    $app->post("/tasks", function() use ($app) {
+        $task = new Task($_POST['description']);
+        $task->save();
+        return $app['twig']->render('tasks.twig', array('tasks' => Task::getAll()));
     });
 
     return $app;
