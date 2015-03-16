@@ -1,4 +1,7 @@
 <?php
+
+    $DB = new PDO('pgsql:host=localhost;dbname=to_do_test');
+
     class Category
     {
         private $name;
