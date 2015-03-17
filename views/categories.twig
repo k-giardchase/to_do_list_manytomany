@@ -6,21 +6,7 @@
     <body><center>
         <h1>Categories</h1>
 
-        <p>Add a frikkin category.  Bro.</p>
-
-        {% if categories is not empty %}
-            <p>Here are all your categories:</p>
-            <ul>
-                {% for category in categories %}
-                    <p><a href="/categories/{{ category.getId }}">{{ category.getName }}</a></p>
-                {% endfor %}
-            </ul>
-            {% else %}
-                <p>There ain't none.</p>
-        {% endif %}
-
-
-        <form action='/categories' method='post'>
+            <form action='/categories' method='post'>
             <label for='name'>Cateegory!</label>
             <input id='name' name='name' type='text'>
 

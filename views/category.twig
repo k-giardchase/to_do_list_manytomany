@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+        <title>To Do list</title>
+    </head>
+    <body>
+        <h1> {{ category.getName }}</h1>
+
+            {% if tasks is not empty %}
+                <p>Here are the tasks</p>
+                <ul>
+                    {% for task in tasks %}
+                        <p>{{ task.getDescription }}</p>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            <h4> Add a Task yo </h4>
+
+            <form action='/tasks' method='post'>
+                <input id='category_id' name='category_id' type='hidden' value='{{ category.getId() }}'>
+                <label for='description'>Task description</label>
+                <input id='description' name='description' type='text'>
+
+                <button type='submit'>Add dat task</button>
+            </form>
+
+            <p><a href='/'>Home</a></p>
+
+    </body>
+</html>

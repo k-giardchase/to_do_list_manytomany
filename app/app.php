@@ -12,7 +12,7 @@
     ));
     //creates path to our index/renders our index
     $app->get("/", function() use ($app) {
-        return $app['twig']->render('index.twig');
+        return $app['twig']->render('index.twig', array('categories' => Category::getAll()));
     });
     //creates the path tasks page/renders our tasks page
     $app->get("/tasks", function() use ($app) {
@@ -20,19 +20,28 @@
     });
     //creates the path to categories page/renders our categories page
     $app->get("/categories", function() use ($app) {
+        $category = new Category($_POST['name']);
+        $category->save();
         return $app['twig']->render('categories.twig', array('categories' => Category::getAll()));
+    });
+    $app->get("/categories/{id}", function($id) use ($app) {
+        $category = Category::findTask($id);
+        return $app['twig']->render('category.twig', array('category' => $category, 'tasks' => $category->getTasks()));
     });
     //calls on our save function and posts saved cats, renders cats
     $app->post("/categories", function() use ($app){
         $category = new Category($_POST['name']);
         $category->save();
-        return $app['twig']->render('categories.twig', array('categories' => Category::getAll()));
+        return $app['twig']->render('index.twig', array('categories' => Category::getAll()));
     });
     //calls on our save function and posts saved tasks, renders tasks
     $app->post("/tasks", function() use ($app) {
-        $task = new Task($_POST['description']);
+        $description = $_POST['description'];
+        $category_id = $_POST['category_id'];
+        $task = new Task($description, $id = null, $category_id);
         $task->save();
-        return $app['twig']->render('tasks.twig', array('tasks' => Task::getAll()));
+        $category = Category::findTask($category_id);
+        return $app['twig']->render('category.twig', array('category' => $category, 'tasks' => Task::getAll()));
     });
     //creates path to delete_cat page, calls on delete function, clears save
     $app->post("/delete_cat", function() use ($app){

@@ -3,13 +3,29 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
         <title>To Do List</title>
     </head>
-    <body><center>
+    <body>
+        <center>
         <h1>To Do List Bro</h1>
+        <p>Create a new category</p>
 
-        
+        <form action="/categories" method="post">
+            <label for="name">Category</label>
+            <input id="name" name="name" type="text">
 
-        <h5>here are all your <a href="/categories"><button type='submit' class="btn btn-success btn-xs">Categories</button></a> and you can add categories as well.</h5>
-        <h5>here are all of the <a href="/tasks"><button type='submit' class="btn btn-warning btn-xs" a href="/tasks"/>Tasks</button></a> and you can also add tasks.</h5>
+            <button type="submit" class="btn btn-success btn-xs">Addegory</button>
+        </form>
 
-    </center></body>
+        {% if categories is not empty %}
+            <p>Here are all your categories:</p>
+            <ul>
+                {% for category in categories %}
+                    <p><a href="/categories/{{ category.getId }}">{{ category.getName }}</a></p>
+                {% endfor %}
+            </ul>
+            {% else %}
+                <p>There ain't none.</p>
+        {% endif %}
+
+        </center>
+    </body>
 </html>

@@ -58,7 +58,7 @@
             $GLOBALS['DB']->exec("DELETE FROM categories *;");
         }
         //allows to search for specific categories within our table
-        static function find($search_id)
+        static function findTask($search_id)
         {
             $found_category = null;
             $categories = Category::getAll();
