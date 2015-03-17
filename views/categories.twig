@@ -6,20 +6,25 @@
     <body><center>
         <h1>Categories</h1>
 
+        <p>Add a frikkin category.  Bro.</p>
+
         {% if categories is not empty %}
-            <p>Here are all your Categories</p>
+            <p>Here are all your categories:</p>
             <ul>
                 {% for category in categories %}
-                    <p>{{ category.getName }}</p>
+                    <p><a href="/categories/{{ category.getId }}">{{ category.getName }}</a></p>
                 {% endfor %}
             </ul>
+            {% else %}
+                <p>There ain't none.</p>
         {% endif %}
 
+
         <form action='/categories' method='post'>
-            <label for='name'>Category</label>
+            <label for='name'>Cateegory!</label>
             <input id='name' name='name' type='text'>
 
-            <button type='submit' class='btn btn-success btn-xs'>Add Category</button>
+            <button type='submit' class='btn btn-success btn-xs'>Addegory!</button>
 
         </form>
         <form action='/delete_cat' method='post'>

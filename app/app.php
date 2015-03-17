@@ -28,7 +28,7 @@
         $category->save();
         return $app['twig']->render('categories.twig', array('categories' => Category::getAll()));
     });
-    //calls on our ave function and posts saved tasks, renders tasks
+    //calls on our save function and posts saved tasks, renders tasks
     $app->post("/tasks", function() use ($app) {
         $task = new Task($_POST['description']);
         $task->save();
@@ -39,7 +39,7 @@
         Category::deleteAll();
         return $app['twig']->render('delete_cat.twig');
     });
-    //creats path to delete_task, calls on delete function, clears save.
+    //creats path to delete_task, calls on delete function, clears save
     $app->post("/delete_task", function() use ($app) {
         Task::deleteAll();
         return $app['twig']->render('delete_task.twig');

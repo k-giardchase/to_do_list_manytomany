@@ -8,7 +8,7 @@
         private $category_id;
         private $id;
 
-        //creates and object with our two variables
+    //creates and object with our two variables
         function __construct($description, $id = null, $category_id)
         {
             $this->description = $description;
@@ -50,7 +50,7 @@
             return $this->category_id;
         }
 
-    //queries the datbase and fetches/returns id of saved tasks
+    //queries the datbase and fetches/returns an id of the saved task
         function save()
         {
             $statement = $GLOBALS['DB']->query("INSERT INTO tasks (description, category_id) VALUES ('{$this->getDescription()}', {$this->getCategoryId()}) RETURNING id;");
@@ -68,7 +68,7 @@
                 $description = $task['description'];
                 $id = $task['id'];
                 $category_id = $task['category_id'];
-                $new_task = new Task($description, $id);
+                $new_task = new Task($description, $id, $category_id);
                 array_push($tasks, $new_task);
             }
             return $tasks;
@@ -79,7 +79,7 @@
             $GLOBALS['DB']->exec("DELETE FROM tasks *;");
         }
         //allows to search for specific categories within our table
-        static function find($search_id)
+        static function findTask($search_id)
         {
             $found_task = null;
             $tasks = Task::getAll();

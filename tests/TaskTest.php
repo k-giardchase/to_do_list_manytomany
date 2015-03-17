@@ -46,7 +46,7 @@
             $test_category->save();
 
             $description = "Wash the dog";
-            $category_id = $test_category->geId();
+            $category_id = $test_category->getId();
             $test_task = new Task($description, $id, $category_id);
             $test_task->save();
 
@@ -82,8 +82,9 @@
         {
             //Arrange
             $name = "Home stuff";
-            $category_id = $test_category->getId();
+            $id = null;
             $test_category = new Category($name, $id);
+            $category_id = $test_category->getId();
             $test_category->save();
 
             $description = "Wash the dog";
@@ -91,7 +92,7 @@
             $test_task = new Task($description, $id, $category_id);
 
             //Act
-            $test_Task->save();
+            $test_task->save();
 
             //Assert
             $result = Task::getAll();
