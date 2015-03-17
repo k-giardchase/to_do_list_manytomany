@@ -17,15 +17,15 @@
 
         {% if categories is not empty %}
             <p>Here are all your categories:</p>
-            <ul>
                 {% for category in categories %}
                     <p><a href="/categories/{{ category.getId }}">{{ category.getName }}</a></p>
                 {% endfor %}
-            </ul>
             {% else %}
                 <p>There ain't none.</p>
         {% endif %}
-
+        <form action="/delete_cat" method="post">
+            <button type="submit" class=" btn btn-danger btn-xs">Subtractegories</button>
+        </form>
         </center>
     </body>
 </html>

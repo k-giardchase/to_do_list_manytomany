@@ -46,12 +46,12 @@
     //creates path to delete_cat page, calls on delete function, clears save
     $app->post("/delete_cat", function() use ($app){
         Category::deleteAll();
-        return $app['twig']->render('delete_cat.twig');
+        return $app['twig']->render('index.twig');
     });
     //creats path to delete_task, calls on delete function, clears save
     $app->post("/delete_task", function() use ($app) {
         Task::deleteAll();
-        return $app['twig']->render('delete_task.twig');
+        return $app['twig']->render('category.twig');
     });
 
     return $app;
