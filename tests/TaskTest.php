@@ -6,6 +6,7 @@
 */
 
     require_once "src/Task.php";
+    require_once "src/Task.php";
 
     $DB = new PDO('pgsql:host=localhost;dbname=to_do_test');
 
