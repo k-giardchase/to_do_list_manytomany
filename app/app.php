@@ -8,6 +8,8 @@
 
     $app = new Silex\Application();
 
+    $app['debug'] = true;
+
     $DB = new PDO('pgsql:host=localhost;dbname=to_do');
     //leads to the views directory
     $app->register(new Silex\Provider\TwigServiceProvider(), array(
@@ -19,7 +21,7 @@
 
     //creates path to our index/renders our index
     $app->get("/", function() use ($app) {
-        return $app['twig']->render('index.twig', array('categories' => Category::getAll()), 'tasks' => Task::getAll());
+        return $app['twig']->render('index.twig', array('categories' => Category::getAll(), 'tasks' => Task::getAll()));
     });
 
     //creates the path tasks page/renders our tasks page
@@ -30,11 +32,6 @@
     //creates the path to categories page/renders our categories page
     $app->get("/categories", function() use ($app) {
         return $app['twig']->render('categories.twig', array('categories' => Category::getAll()));
-    });
-
-    $app->get("/categories/{id}", function($id) use ($app) {
-        $category = Category::findTask($id);
-        return $app['twig']->render('categories.twig', array('categories' => $category, 'tasks' => $category->getTasks()));
     });
 
     //calls on our save function and posts saved tasks, renders tasks
@@ -52,35 +49,42 @@
     });
 
     //calls on our save function and posts saved cats, renders cats
-    $app->post("/categories", function() use ($app){
+    $app->post("/categories", function() use ($app) {
         $category = new Category($_POST['name']);
         $category->save();
         return $app['twig']->render('categories.twig', array('categories' => Category::getAll()));
     });
 
     //calls on our save function and posts saved cats, renders cats
-    $app->get("/categories/{id}", function($id) use ($app){
+    $app->get("/categories/{id}", function($id) use ($app) {
         $category = Category::find($id);
-        return $app['twig']->render('categories.twig', array('category' => $category, 'tasks' => $category->getTasks(), 'all_tasks' => Task::getAll()));
+        return $app['twig']->render('category.twig', array('category' => $category, 'tasks' => $category->getTasks(), 'all_tasks' => Task::getAll()));
     });
 
     $app->post('/add_tasks', function() use ($app) {
         $category = Category::find($_POST['category_id']);
         $task = Task::findTask($_POST['task_id']);
         $category->addTask($task);
-        return $app['twig']->render('category.twig', array('category' => $category))
-    }
+        return $app['twig']->render('category.twig', array('category' => $category, 'categories' => Category::getAll(), 'tasks' => $category->getTasks(), 'all_tasks' => Task::getAll()));
+    });
+
+    $app->post('/add_categories', function() use ($app) {
+        $category = Category::find($_POST['category_id']);
+        $task = Task::findTask($_POST['task_id']);
+        $task->addCategory($category);
+        return $app['twig']->render('task.twig', array('task' => $task, 'tasks' => Task::getAll(), 'categories' => $task->getCategories(), 'all_categories' => Category::getAll()));
+    });
 
     //creates path to delete_cat page, calls on delete function, clears save
-    $app->post("/delete_category", function() use ($app){
+    $app->post("/delete_categories", function() use ($app){
         Category::deleteAll();
-        return $app['twig']->render('index.twig');
+        return $app['twig']->render('index.twig', array('categories' => Category::getAll()));
     });
 
     //creats path to delete_task, calls on delete function, clears save
     $app->post("/delete_tasks", function() use ($app) {
         Task::deleteAll();
-        return $app['twig']->render('categories.twig');
+        return $app['twig']->render('tasks.twig', array('tasks' => Task::getAll()));
     });
 
     return $app;

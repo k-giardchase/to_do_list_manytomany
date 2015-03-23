@@ -8,7 +8,7 @@
 
             {% if categories is not empty %}
                 <ul>
-                    {% for category in categoriess %}
+                    {% for category in categories %}
                         <p><a href='/categories/{{ category.getId }}'>{{ category.getName }}</a></p>
                     {% endfor %}
                 </ul>
@@ -20,7 +20,7 @@
 
                 <button type='submit'>Add dat Cat</button>
             </form>
-            <form action='/delete_category' method='post'>
+            <form action='/delete_categories' method='post'>
                 <button type='submit'>Delete Category</button>
             </form>
             <p><a href='/'>Home</a></p>
