@@ -6,13 +6,15 @@
     <body><center>
         <h1>To Do List</h1>
 
+        {% if tasks is not empty %}
+
             <p>Here are all your tasks</p>
             <ul>
                 {% for task in tasks %}
-                    <p>{{ task.getDescription }}</p>
+                    <p><a href='/tasks/{{ task.getId }}'>{{ task.getDescription }}</a></p>
                 {% endfor %}
             </ul>
-
+        {% endif %}
 
         <form action='/tasks' method='post'>
             <label for='description'>Tasks</label>
@@ -20,7 +22,7 @@
 
             <button type='submit' class='btn btn-success btn-xs'>Add Category</button>
         </form>
-        <form action='/delete_task' method='post'>
+        <form action='/delete_tasks' method='post'>
             <button type='submit' class="btn btn-danger">>delete</button>
         </form>
         <p><a href='/'>Home</a></p>

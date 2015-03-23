@@ -99,7 +99,7 @@
                 $task_id = $id['task_id'];
                 $result = $GLOBALS['DB']->query("SELECT * FROM tasks WHERE id = {$task_id};");
                 $returned_task = $result->fetchAll(PDO::FETCH_ASSOC);
-
+var_dump($returned_task);
                 $description = $returned_task[0]['description'];
                 $id = $returned_task[0]['id'];
                 $new_task = new Task($description, $id);

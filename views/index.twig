@@ -15,6 +15,14 @@
             <button type="submit" class="btn btn-success btn-xs">Addegory</button>
         </form>
 
+        <form action="/tasks" method="post">
+            <label for="description">Tasks</label>
+            <input id="description" name="description" type="text">
+
+            <button type="submit" class="btn btn-success btn-xs">Addegory</button>
+        </form>
+
+
         {% if categories is not empty %}
             <p>Here are all your categories:</p>
                 {% for category in categories %}
