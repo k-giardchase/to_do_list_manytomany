@@ -3,15 +3,14 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
         <title>To Do List</title>
     </head>
-    <body>
+    <body><center>
         <h1> {{ category.getName }} </h1>
 
         {% if tasks is not empty %}
-            <p> Here are the tasks for this category </p>
 
             <ul>
                 {% for task in tasks %}
-                    <li>{{ task.getDescription }} </li>
+                    <p>{{ task.getDescription }}</p>
                 {% endfor %}
             </ul>
         {% endif %}
@@ -26,12 +25,12 @@
                     <option value="{{ task.getId }}">{{ task.getDescription }}</option>
                 {% endfor %}
             </select>
-            <button type='submit'>Add task</button>
+            <button type='submit' class='btn btn-warning btn-xs'>Add task</button>
         </form>
 
-        <p><a href='/categories/{{ category.getId }}/edit'>Edit this category</a></p>
+        <p><button type="submit" class='btn btn-info'><a href='/categories/{{ category.getId }}/edit'>Edit this category</a></button></p>
 
-        <p><a href='/'>Home</a></p>
+        <p><button type='submit' class='btn btn-info'><a href='/'>Home</a></button></p>
 
-    </body>
+    </center></body>
 </html>

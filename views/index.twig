@@ -5,32 +5,22 @@
     </head>
     <body>
         <center>
-        <h1>To Do List Bro</h1>
-        <p>Create a new category</p>
+        <h1>To Do</h1>
+        <h5>Create a new category</h5>
 
-        <form action="/categories" method="post">
-            <label for="name">Category</label>
-            <input id="name" name="name" type="text">
-
-            <button type="submit" class="btn btn-success btn-xs">Addegory</button>
-        </form>
 
         {% if categories is not empty %}
-            <p>Here are all your categories:</p>
                 {% for category in categories %}
                     <p><a href="/categories/{{ category.getId }}">{{ category.getName }}</a></p>
                 {% endfor %}
             {% else %}
-                <p>There ain't none.</p>
         {% endif %}
 
 
-        <form action="/delete_categories" method="post">
-            <button type="submit" class=" btn btn-danger btn-xs">Subtractegories</button>
-        </form>
+        <a href='/categories'><button type='submit' class='btn btn-danger btn-sm'>Categories</button></a>
 
-
-            <a href='/tasks'><button type='submit' class='btn btn-warning'>Tasks</button></a>
+        <h5> Create a Task List for your Categories </h5>
+            <a href='/tasks'><button type='submit' class='btn btn-warning btn-sm'>Tasks</button></a>
 
         </center>
     </body>

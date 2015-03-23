@@ -3,7 +3,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
         <title>To Do list</title>
     </head>
-    <body>
+    <body><center>
         <h1>{{ task.getDescription }}</h1>
 
         {% if categories is not empty %}
@@ -28,9 +28,9 @@
             <button type='submit'>Add category</button>
         </form>
 
-        <p><a href='/tasks/{{ task.getId }}/edit'> Edit this task</a></p>
+        <p><button type='submit' class='btn btn-info'><a href='/tasks/{{ task.getId }}/edit'> Edit this task</a></button></p>
 
-        <p><a href='/'>Home</a></p>
+        <p><button type='submit' class='btn btn-info'><a href='/'>Home</a></button></p>
 
-    </body>
+    </center></body>
 </html>
